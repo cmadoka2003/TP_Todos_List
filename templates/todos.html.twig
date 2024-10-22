@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig' %}
+
+{% block titrePage %}
+	<title>Mes Listes</title>
+{% endblock %}
+
+{% block stylePage %}
+	<link rel="stylesheet" href={{ asset('style/todos.css') }}>
+{% endblock %}
+
+{% block contentPage %}
+	{% if message is defined %}
+		<p>{{message}}</p>
+	{% endif %}
+	<h1>Mes Listes</h1>
+	<form action="/processTodosForm" method="POST">
+		<label for="titre">titre de la liste :</label>
+		<input type="text" id="titre" name="titre">
+		<label for="firstTache">Première tâche :</label>
+		<input type="text" id="firstTache" name="firstTache">
+		<input type="submit" value="Envoyer" class="button">
+	</form>
+
+	{% if nombresTodos is defined %}
+		<p>{{nombresTodos}}</p>
+	{% else %}
+        <div class="todos-container">
+            {% for todo in todos %}
+                <div class="todos">
+                    <h2>{{todo.getNom()}}</h2>
+                    <div class="change">
+                        {% for tache in todo.getTaches() %}
+						<div class="first-part">
+							<p class="tacheName">{{tache.getNom()}}</p>
+                            <button class={{ not tache.getIsFinished() ? "red" : "green" }}>
+                                <a href={{'/processIsFinished/' ~ tache.getId()}}>IsFinished</a>
+                            </button>
+						</div>
+                        {% endfor %}
+						<form action={{'/processAjoutForm/' ~ todo.getId()}} method="POST" class="form-ajout">
+							<label for="tache">Ajoute une tâche :</label>
+							<input type="text" id="tache" name="tache">
+							<input type="submit" value="Envoyer" class="button-ajout">
+						</form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+	{% endif %}
+{% endblock %}

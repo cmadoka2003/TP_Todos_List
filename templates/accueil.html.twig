@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block titrePage %}
+    <title>Page d'accueil</title>
+{% endblock %}
+
+{% block stylePage %}
+    <link rel="stylesheet" href={{ asset('style/accueil.css') }}>
+{% endblock %}
+
+{% block contentPage %}
+    <h1>Page d'Accueil</h1>
+    <div class="hero">
+        <img src={{ asset('images/contact.jpg') }} alt="Contact">
+    </div>
+    <div class="description">
+        <p>Bienvenue sur notre site ! Nous offrons des solutions techniques sur mesure pour répondre à vos besoins.<br> 
+        Pour toute assistance ou question, n'hésitez pas à contacter nos techniciens qualifiés.</p>
+    </div>
+    <div class="button-container">
+        <button class="button"><a href={{ path('contact') }}>Contactez-nous</a></button>
+    </div>
+{% endblock %}

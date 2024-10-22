@@ -1,0 +1,39 @@
+.hero, h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.hero img {
+    width: 50%;
+}
+
+.decription {
+    display: flex;
+    justify-content: center;
+}
+
+.description p {
+    text-align: center;
+    font-size: 25px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+} 
+
+.button {
+    background-color: #333;
+    color: #F5F5F5;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button a {
+    color: #F5F5F5;
+    text-decoration: none;
+}

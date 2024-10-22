@@ -1,0 +1,54 @@
+.todos-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.todos {
+    width: 23%;
+    margin-top: 25px;
+    border: 1px solid black;
+    margin: 18px;
+    padding: 10px;
+}
+
+.first-part {
+    display: flex;
+    margin: 10px 0;
+}
+
+.form-ajout input {
+    width: 250px;
+    height: 20px;
+}
+
+.form-ajout label {
+    font-size: 15px;
+}
+
+.tacheName {
+    width: 300px;
+}
+
+.red {
+    background-color: red;
+    margin-left: 25px;
+}
+
+.green {
+    background-color: green;
+    margin-left: 25px;
+}
+
+.red a {
+    color: black;    
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.green a {
+    color: black;
+    text-decoration: none;
+    margin: 0 10px;
+}

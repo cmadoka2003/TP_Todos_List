@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block titrePage %}{% endblock %}
+    {% block stylePage %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <a href={{ path('accueil') }}>Accueil</a>
+            <a href={{ path('contact') }}>Contact</a>
+            <a href={{ path('todosList')}}>Mes Listes</a>
+        </nav>
+    </header>
+    <main>
+        {% block contentPage %}{% endblock %}
+    </main>
+</body>
+</html>
