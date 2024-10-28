@@ -22,7 +22,10 @@ class InscriptionForm extends AbstractType
             EmailType::class,
             [
                 "attr" => ["placeholder" => "Entrez un email"],
-                "constraints" => [new Assert\Email(["message" => "Email invalidé!"])]
+                "constraints" => [
+                    new Assert\Email(["message" => "Email invalidé!"]),
+                    new Assert\NotBlank(["message" => "Email a remplir"])
+                ]
         ])
         ->add(
             'password',

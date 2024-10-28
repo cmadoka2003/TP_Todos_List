@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylePage %}
+    <link rel="stylesheet" href={{ asset('style/contact.css') }}>
+{% endblock %}
+
+{% block contentPage %}
+	<h1>Connexion</h1>
+    {{ form_start(connexionForm) }}
+
+        {{ form_widget(connexionForm.email, {"full_name":"email"}) }}
+        <div class="error">
+            {{ form_errors(connexionForm.email) }}
+        </div>
+
+        {{ form_widget(connexionForm.password, {"full_name":"password"}) }}
+        <div class="error">
+            {{ form_errors(connexionForm.password) }}
+        </div>
+
+    {{ form_end(connexionForm) }}
+{% endblock %}

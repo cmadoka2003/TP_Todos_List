@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylePage %}
+    <link rel="stylesheet" href={{ asset('style/contact.css') }}>
+{% endblock %}
+
+{% block contentPage %}
+	<h1>Profil de {{app.user.email}}</h1>
+{% endblock %}
