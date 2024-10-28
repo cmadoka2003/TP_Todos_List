@@ -9,42 +9,48 @@
 {% endblock %}
 
 {% block contentPage %}
-	{% if message is defined %}
-		<p>{{message}}</p>
-	{% endif %}
+	<p>{{app.request.query.get("message")}}</p>
 	<h1>Mes Listes</h1>
 	<form action="/processTodosForm" method="POST">
 		<label for="titre">titre de la liste :</label>
 		<input type="text" id="titre" name="titre">
 		<label for="firstTache">Première tâche :</label>
 		<input type="text" id="firstTache" name="firstTache">
-		<input type="submit" value="Envoyer" class="button">
+		<input type="submit" value="Ajouter" class="button">
 	</form>
 
 	{% if nombresTodos is defined %}
 		<p>{{nombresTodos}}</p>
 	{% else %}
-        <div class="todos-container">
-            {% for todo in todos %}
-                <div class="todos">
-                    <h2>{{todo.getNom()}}</h2>
-                    <div class="change">
-                        {% for tache in todo.getTaches() %}
-						<div class="first-part">
-							<p class="tacheName">{{tache.getNom()}}</p>
-                            <button class={{ not tache.getIsFinished() ? "red" : "green" }}>
-                                <a href={{'/processIsFinished/' ~ tache.getId()}}>IsFinished</a>
-                            </button>
-						</div>
-                        {% endfor %}
+		<div class="todos-container">
+			{% for todo in todos %}
+				<div class="todos">
+					<h2>{{todo.getNom()}}</h2>
+					<form action={{"delete/"~todo.getId()}}>
+						<button class="invisible-button">
+							<svg class="delete-list" width="512" height="512" viewbox="0 0 512 512" fill="none">
+								<rect x="37" y="122.07" width="120.308" height="500.03" rx="15" transform="rotate(-45 37 122.07)"/>
+								<rect x="390.578" y="37" width="120.308" height="500.03" rx="15" transform="rotate(45 390.578 37)"/>
+							</svg>
+						</button>
+					</form>
+					<div class="change">
+						{% for tache in todo.getTaches() %}
+							<div class="first-part">
+								<p class="tacheName">{{tache.getNom()}}</p>
+								<button class={{ not tache.getIsFinished() ? "red" : "green" }}>
+									<a href={{'/processIsFinished/' ~ tache.getId()}}>{{not tache.getIsFinished() ? "notFinished" : "Finished" }}</a>
+								</button>
+							</div>
+						{% endfor %}
 						<form action={{'/processAjoutForm/' ~ todo.getId()}} method="POST" class="form-ajout">
 							<label for="tache">Ajoute une tâche :</label>
 							<input type="text" id="tache" name="tache">
-							<input type="submit" value="Envoyer" class="button-ajout">
+							<input type="submit" value="Ajouter" class="button-ajout">
 						</form>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 	{% endif %}
 {% endblock %}

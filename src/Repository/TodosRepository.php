@@ -22,4 +22,10 @@ class TodosRepository extends ServiceEntityRepository
         }
         return $nouveauTodosList;
     }
+
+    public function supprimer(TodosList $todo)
+    {
+        $this->getEntityManager()->remove($todo);
+        $this->getEntityManager()->flush();
+    }
 }

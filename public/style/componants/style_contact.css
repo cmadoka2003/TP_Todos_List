@@ -32,3 +32,8 @@ textarea {
     cursor: pointer;
     margin-top: 15px;
 }
+
+.error li{
+    color: red;
+    list-style: none;
+}

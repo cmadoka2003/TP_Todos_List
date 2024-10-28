@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylePage %}
+    <link rel="stylesheet" href={{ asset('style/contact.css') }}>
+{% endblock %}
+
+{% block contentPage %}
+	<h1>Page d'inscription</h1>
+    {{ form_start(formulaire) }}
+
+        {{ form_label(formulaire.email) }}
+        {{ form_widget(formulaire.email, {attr:{class:"maclass"}}) }}
+        <div class="error">
+            {{ form_errors(formulaire.email) }}
+        </div>
+
+        {{ form_label(formulaire.password) }}
+        {{ form_widget(formulaire.password, {attr:{class:"maclass"}}) }}
+        <div class="error">
+            {{ form_errors(formulaire.password) }}
+        </div>
+        
+    {{ form_end(formulaire) }}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block titrePage %}
+	<title>Mes Notes</title>
+{% endblock %}
+
+{% block stylePage %}
+	<link rel="stylesheet" href={{ asset('style/contact.css') }}>
+{% endblock %}
+
+{% block contentPage %}
+    <h1>Page de Notes</h1>
+    {{ form_start(formulaire) }}
+
+        {{ form_label(formulaire.nom) }}
+        {{ form_widget(formulaire.nom, {attr:{class:"maclass"}}) }}
+        <div class="error">
+            {{ form_errors(formulaire.nom) }}
+        </div>
+
+        {{ form_label(formulaire.matiere) }}
+        {{ form_widget(formulaire.matiere, {attr:{class:"maclass"}}) }}
+        <div class="error">
+            {{ form_errors(formulaire.matiere) }}
+        </div>
+
+        {{ form_label(formulaire.note) }}
+        {{ form_widget(formulaire.note, {attr:{class:"maclass"}}) }}
+        <div class="error">
+            {{ form_errors(formulaire.note) }}
+        </div>
+        
+    {{ form_end(formulaire) }}
+{% endblock %}

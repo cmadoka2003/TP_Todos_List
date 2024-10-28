@@ -12,11 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class TodosController extends AbstractController
 {
     #[Route("/todosList", name: "todosList")]
-    function todosList(TachesRepository $tachesrepo, TodosRepository $todosRepo)
+    function todosList(TodosRepository $todosRepo)
     {
         $todos = $todosRepo->findAll();
         if(!$todos){
-            $message = "aucun todos";
+            $message = "aucun todos"; 
             return $this->render('todos.html.twig', ["nombresTodos" => $message]);
         }
         return $this->render('todos.html.twig', ["todos" => $todos]);
@@ -30,8 +30,7 @@ class TodosController extends AbstractController
 
         if(!isset($titre) || empty($titre) || !isset($taches) || empty($taches)){
             $message = "Données Obligatoires!";
-            $todos = $todosrepository->findAll();
-            return $this->render('todos.html.twig', ["message" => $message, "todos" => $todos]);
+            return $this->redirectToRoute('todosList', ["message" => $message]);
         }
 
         $nouveauTodos = new TodosList();
@@ -44,12 +43,11 @@ class TodosController extends AbstractController
 
         $todosrepository->sauvegarder($nouveauTodos, true);
 
-        $todos = $todosrepository->findAll();
-        return $this->render('todos.html.twig', ["todos" => $todos]);
+        return $this->redirectToRoute('todosList');
     }
 
     #[Route("/processIsFinished/{id}", name: "processIsFinished")]
-    function processIsFinished(TachesRepository $tachesRepository, $id, TodosRepository $todosrepository)
+    function processIsFinished(TachesRepository $tachesRepository, $id)
     {
         $isFinished = $tachesRepository->find($id);
 
@@ -57,8 +55,7 @@ class TodosController extends AbstractController
 
         $tachesRepository->sauvegarder($isFinished, true);
 
-        $todos = $todosrepository->findAll();
-        return $this->render('todos.html.twig', ["todos" => $todos]);
+        return $this->redirectToRoute('todosList');
     }
 
     #[Route("/processAjoutForm/{id}", name: "processAjoutForm")]
@@ -68,8 +65,7 @@ class TodosController extends AbstractController
         
         if(!$tache){
             $message = "Données Obligatoires!";
-            $todos = $todosRepository->findAll();
-            return $this->render('todos.html.twig', ["message" => $message, "todos" => $todos]);
+            return $this->redirectToRoute('todosList', ["message" => $message]);
         }
         $ajout = $todosRepository->find($id);
 
@@ -80,8 +76,17 @@ class TodosController extends AbstractController
 
         $todosRepository->sauvegarder($ajout, true);
 
-        $todos = $todosRepository->findAll();
-        return $this->render('todos.html.twig', ["todos" => $todos]);
+        return $this->redirectToRoute('todosList');
+    }
 
+    #[Route("/delete/{id}", name: "tache.delete")]
+    function delete($id, TodosRepository $todosRepository)
+    {
+        $deleteTodo = $todosRepository->find($id);
+        if(!$deleteTodo){
+            return $this->redirectToRoute('todosList');
+        }
+        $todosRepository->supprimer($deleteTodo);
+        return $this->redirectToRoute('todosList');
     }
 }
